@@ -16,14 +16,10 @@ Teal (`#0E8C82`) brackets, ~5px thick, on either side of the plain wordmark — 
 
 ## The bridge glyph (compact mark)
 
-The reusable icon/favicon device: a horizontal bar (the "bridge," entering at the crossbar height of the H) plus two vertical strokes. As an SVG (100×100 viewBox):
+The reusable icon/favicon/avatar device: a horizontal bar (the "bridge," entering at the crossbar height of the H) plus two vertical strokes, in a square tile. Never rounded. Three ready SVG files are bundled in `assets/`:
 
-```html
-<svg viewBox="0 0 100 100">
-  <rect x="8"  y="43" width="46" height="14" fill="CURRENT_OR_ACCENT_COLOR"/>  <!-- bridge bar -->
-  <rect x="38" y="20" width="14" height="60" fill="INK_OR_WHITE"/>              <!-- left vertical -->
-  <rect x="72" y="20" width="14" height="60" fill="INK_OR_WHITE"/>              <!-- right vertical -->
-</svg>
-```
+- `assets/bridge-mark-teal.svg` — Teal `#0E8C82` tile, white glyph. The default compact mark.
+- `assets/bridge-mark-ink.svg` — Ink `#0B2A33` tile, Signal-teal `#14CDB8` bridge bar, white verticals. For dark contexts that need more contrast than the plain teal tile.
+- `assets/bridge-mark-outline.svg` — white tile with a `#C2CACA` border, Signal-teal bridge bar, Ink verticals. For light/white contexts (e.g. a favicon on a white toolbar).
 
-Used as a compact mark (app icon/favicon/avatar): Teal fill with a white glyph, or Ink fill with a Signal-teal bridge bar and white verticals, or white/light background with an Ink glyph and 2px `#C2CACA` border. Never rounded — square tile, square glyph.
+Use these directly as app icons, favicons, or social avatars — don't redraw the geometry by hand.

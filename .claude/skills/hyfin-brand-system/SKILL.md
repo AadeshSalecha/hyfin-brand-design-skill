@@ -84,7 +84,7 @@ Two real, usable wordmark files are bundled in `assets/`:
 - Minimum size: 24px tall in print, 20px tall on screen. Below that, use the compact bridge-glyph mark instead (see `references/logo-directions.md`) rather than shrinking the wordmark further.
 - A stacked/inline lockup with the strapline needs a minimum width of ~120px to stay legible.
 
-There are a handful of *shortlisted, not-yet-final* alternate logo treatments (an ink-enclosure stamp, a stacked monogram tile, a two-tone split wordmark, a bracket enclosure) — these are exploratory, have no production asset files, and should only come up if someone explicitly asks to see logo variants or explore a new lockup. Default to the plain wordmark. Details in `references/logo-directions.md`.
+For a compact icon/favicon/avatar (not the full wordmark), use the bridge-mark SVGs bundled in `assets/` — see `references/logo-directions.md`. That file also covers a handful of *shortlisted, not-yet-final* alternate wordmark treatments (an ink-enclosure stamp, a stacked monogram tile, a two-tone split wordmark, a bracket enclosure); those are exploratory with no production asset files and should only come up if someone explicitly asks to see logo variants. Default to the plain wordmark.
 
 ## Layout
 
@@ -94,14 +94,18 @@ There are a handful of *shortlisted, not-yet-final* alternate logo treatments (a
 - A standard page/slide reads top to bottom as: mono uppercase eyebrow (Teal 700) → H1/H2 title (Outfit bold, tight tracking) → content in a ruled grid → footer (2px Ink rule, "HYFIN · [doc name]" left, page number right, both mono).
 - Give sparse content room to breathe (center it vertically) rather than cramming it into a corner — but don't add decoration to fill space.
 
-Component specs (buttons, tables, cards, KPI blocks, charts/data-viz, icon style) are in `references/components.md` — pull that in when the task involves a table, chart, button, or data callout.
+Component specs (buttons, tables, cards, KPI blocks, charts/data-viz, icon style) are in `references/components.md` — pull that in when the task involves a table, chart, button, or data callout. When actually generating a `.pptx`/`.docx` (the `pptx`/`docx` skills), `references/pptx-docx-snippets.md` has working pptxgenjs/docx-js starting points for the cover slide, KPI row, footer, and memo header.
 
 ## Applying this in Google Docs / Slides
 
-1. **Fonts** — set headings and body to **Outfit**, and set any numbers/labels/footers/page-numbers to **Martian Mono**, using each app's font picker ("More fonts" in Docs/Slides).
-2. **Colors** — use the custom color field and type the exact hex from the table above. Default text color is Ink `#0B2A33` on a white or Canvas `#F4F6F6` background. Reach for Teal 700 `#0A5E56`, not Teal `#0E8C82`, whenever teal is applied to *text*.
-3. **Logo** — insert `assets/hyfin-wordmark-ink.png` on white/light slides or pages, `assets/hyfin-wordmark-white.png` on dark (Ink or Teal) ones. Resize proportionally (drag a corner handle, not an edge one) and keep it flush left.
-4. **Rules & dividers** — draw a 2–3pt line/border in Ink `#0B2A33` under titles and above footers rather than relying on default paragraph spacing; set table/shape borders to square corners (Google Docs/Slides shapes default to square already — just don't apply a rounded-rectangle shape).
+There is no tool that formats a live Google Doc/Slide directly. The real pipeline is: build a properly branded `.docx` or `.pptx` (using the `docx` / `pptx` skills — trigger them for the actual file mechanics) and upload it with `Google_Drive__create_file`, which converts it to a native Google Doc/Slides/Sheets file on upload. Only fall back to plain-text/markdown output if there's no Drive access at all.
+
+**This skill's rules override the pptx skill's generic slide-design defaults where they conflict.** The `pptx` skill's own design guidance says *"NEVER use accent lines under titles"* and *"NEVER add decorative color bars or accent stripes"* — good general advice, but exactly backwards for Hyfin: the Signal-teal bar under the strapline and the 2px Ink rules dividing every section **are** Hyfin's visual signature, not AI-generated filler. Keep them. Everything else in the pptx skill's design guidance (one dominant color, strong title/body size contrast, flush-left body text, real charts over decoration) already agrees with this system — Ink dominant, Teal supporting, Signal as the one accent maps directly onto its "one color dominates, one sharp accent" rule.
+
+1. **Fonts** — Outfit for headings/body, Martian Mono for numbers/labels/footers. Both are genuine Google Fonts, so once the file lands in Google Docs/Slides they render exactly right — pptx's "safe font" list (Arial, Calibri, etc.) is about literal Microsoft Office rendering and doesn't apply here. If a deliverable might *also* be opened in real PowerPoint/Word (not just Google's viewer), treat Outfit/Martian Mono as pptx's "QA-unreliable" tier: leave ~10% size slack and don't trust the LibreOffice-rendered QA preview's text-fit for exact overflow.
+2. **Colors** — use the exact hex from the table above. In `pptxgenjs`/`docx`-js, hex is bare six digits with no `#` and no alpha (`"0E8C82"`, not `"#0E8C82"` or an 8-digit value) — the extra characters corrupt the file. Reach for Teal 700 `#0A5E56`, not Teal `#0E8C82`, whenever teal is applied to *text* on a light ground.
+3. **Logo** — place `assets/hyfin-wordmark-ink.png` on white/light slides or pages, `assets/hyfin-wordmark-white.png` on dark (Ink or Teal) ones, flush left, resized proportionally (never stretched non-uniformly).
+4. **Rules & dividers** — a 2pt straight line/border in Ink `#0B2A33` under titles and above footers; square corners on every shape/table (no `ROUNDED_RECTANGLE`).
 5. **Footer convention** — small mono text, left "HYFIN · [DOCUMENT OR DECK NAME]", right the page number (e.g. "3 / 12"), both in Grey 600 `#5A6868` or, on a dark background, the teal-tint `#6FBDB4`.
 6. **Voice** — open with the one-liner if it's an external-facing doc, use the strapline verbatim wherever a tagline is needed, and never introduce a new tagline or reword the locked lines.
 
